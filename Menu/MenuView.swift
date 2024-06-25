@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct MenuView: View {
+    @State var sushiItems: [MenuItem] = [MenuItem]()
+    var dataService = DataService()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List(sushiItems) {sushiItem in
+            MenuItemRow(item: sushiItem)
         }
-        .padding()
+        .listStyle(.plain)
+        .onAppear(perform: {
+          sushiItems = dataService.getData()
+        })
     }
 }
 
