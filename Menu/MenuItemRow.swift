@@ -8,11 +8,32 @@
 import SwiftUI
 
 struct MenuItemRow: View {
+    var item: MenuItem
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(item.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 50)
+                .cornerRadius(10)
+            Text(item.name)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+    
+            Spacer()
+            
+            Text(item.formatPrice())
+        }
+        .listRowSeparator(.hidden)
+        .listRowBackground(
+            Color(.brown)
+                .opacity(0.1)
+        )
     }
 }
 
 #Preview {
-    MenuItemRow()
+    MenuItemRow(
+        item: MenuItem(name: "Onigiri", price: 2.9, imageName: "onigiri")
+    )
 }
